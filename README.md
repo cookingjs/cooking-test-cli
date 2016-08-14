@@ -1,4 +1,4 @@
-# cooking-test-cli
+# cooking-test-command
 
 ## Install
 ```shell
