@@ -13,8 +13,10 @@ module.exports = function (program) {
   const pwd = shelljs.pwd()
 
   shelljs.cd(PLUGIN_PATH)
-  const binPath = exec('npm', ['bin']).stdout.toString().trim()
-  const testCommand = path.join(binPath, testPackage)
+
+  const pkg = require(testPackage + '/package.json').bin
+  const command = Object.keys(pkg)[0]
+  const testCommand = path.resolve(PLUGIN_PATH, 'node_modules', testPackage, pkg[command])
 
   shelljs.cd(pwd)
   exec(testCommand, options, {stdio: 'inherit'})
